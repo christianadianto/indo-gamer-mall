@@ -1,0 +1,28 @@
+.card img{
+    background-color: #eee;
+    box-shadow: rgba(0,0,0,.25) 0 0 0.5em;
+    border-radius: 1.25em;
+    height: 300px;
+    width: 200px;
+}
+
+.card-container .card-deck .card{
+    border: none;
+}
+
+.footer-wrapper{
+    width: 100%;
+    position: absolute;
+    
+    bottom: 0;
+
+    padding: 1rem;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+body{
+    position: relative;
+    padding-bottom: 6rem;
+    min-height: 100vh;
+}
