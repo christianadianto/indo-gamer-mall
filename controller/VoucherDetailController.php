@@ -1,14 +1,14 @@
 <?php
-    require '../model/Voucher.php';
+    require_once '../model/VoucherDetail.php';
 
-    class VoucherController
+    class VoucherDetailController
     {
         public function index(){
-            return Voucher::all();
+            return VoucherDetail::all();
         }
 
         public function get($id){
-            return Voucher::find($id);
+            return VoucherDetail::find($id);
         }
 
         public function store(){

@@ -2,13 +2,13 @@
 
     require_once '../database/Connect.php';
     
-    class Voucher
+    class VoucherDetail
     {
 
         public static function all(){
             $connection = Connect::createConnection();
 
-            $query = "SELECT * FROM vouchers";
+            $query = "SELECT * FROM voucher_details";
             $result = $connection->query($query);
             
             $data = [];
@@ -24,7 +24,7 @@
         public static function find($id){
             $connection = Connect::createConnection();
 
-            $query = "SELECT * FROM vouchers where id = '".$id."'";
+            $query = "SELECT * FROM voucher_details where voucher_id = '".$id."'";
             $result = $connection->query($query);
             
             $data = [];

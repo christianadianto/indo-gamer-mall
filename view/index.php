@@ -1,7 +1,7 @@
 <?php
 
 include_once 'header.php';
-require '../controller/VoucherController.php';
+require_once '../controller/VoucherController.php';
 
 $voucherController = new VoucherController();
 $vouchers = $voucherController->index();

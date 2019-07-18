@@ -26,3 +26,11 @@ body{
     padding-bottom: 6rem;
     min-height: 100vh;
 }
+
+.voucher-detail-section{
+    padding: 20px;
+}
+
+.voucher-row{
+    padding: 10px;
+}
