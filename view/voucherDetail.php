@@ -2,7 +2,36 @@
     include_once 'header.php';
     require_once '../controller/VoucherController.php';
     require_once '../controller/VoucherDetailController.php';
+    require_once '../controller/CartController.php';
+
+    session_start();
+
+    if(!isset($_GET['id'])){
+        header("Location:index.php");
+    }
+
     $voucher_id = $_GET['id'];
+
+    if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['addtocart'])){
+        $cartController = new CartController();
+        $quantity = $_POST['quantity'];
+        $voucher_type_id = "";
+        if(isset($_POST['voucher_type'])){
+            $voucher_type_id = $_POST['voucher_type'];
+        }
+        $data = [
+            'quantity'=>$quantity,
+            'voucher_type_id'=>$voucher_type_id,
+            'voucher_id'=>$voucher_id,   
+        ];
+        $cartController->insert($data);
+        header('Location:cart.php');
+    }
+    else if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['buynow'])){
+        echo ('abc');
+    }
+    
+  
     $voucher_controller = new VoucherController();
     $voucher_detail_controller = new VoucherDetailController();
 
@@ -12,39 +41,50 @@
 
 <div class="voucher-detail-section section">
     <div class="voucher-detail-container container">
-        <form action="">
+        <form action="voucherDetail.php?id=<?=$voucher_id?>" method="POST">
             <div class="voucher-row row">
                 <div class="product-col col-8">
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-2">
                             <img src="../asset/image/<?=$voucher[0]['image_detail']?>" alt="<?=$voucher[0]['name']?>">
                         </div>
-                        <div class="col=9 align-self-center">
+                        <div class="col-10 align-self-center">
                             <span><?=$voucher[0]['name']?></span>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="voucher-type row">
+                        <div class="col">
+                            <?php
+                                for($i=0;$i<count($voucher_details);$i++){
+                                    $voucher_detail = $voucher_details[$i];
+                            ?>
+                                <div class="form-check">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="customRadio<?=$i+1?>" name="voucher_type" value=<?=$voucher_detail['id']?> class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadio<?=$i+1?>">
+                                            <?=$voucher_detail['type']?>
+                                        </label>
+                                    </div>
+                                </div>
+                            <?php
+                                }
+                            ?>
+                            
                         </div>
                     </div>
                 </div>
                 <div class="payment-col col-4">
-                    <span>
-                        testing
-                    </span>
-                </div>
-            </div>
-            <div class="voucher-type row">
-                <div class="col">
-                    <?php
-                         for($i=0;$i<count($voucher_details);$i++){
-                            $voucher_detail = $voucher_details[$i];
-                    ?>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                            <label class="form-check-label" for="exampleRadios1">
-                                <?=$voucher_detail['type']?>
-                            </label>
-                        </div>
-                    <?php
-                         }
-                    ?>
+                    <div class="form-group">
+                        <label for="quantity">Quantity</label>
+                        <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Enter qty">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="Buy Now" name="buynow">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="Add to cart" name="addtocart">
+                    </div>
                 </div>
             </div>
         </form>

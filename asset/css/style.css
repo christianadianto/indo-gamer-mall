@@ -34,3 +34,27 @@ body{
 .voucher-row{
     padding: 10px;
 }
+
+.voucher-type{
+    padding-top: 15px;
+}
+
+.product-col{
+    border: 1px #dbdbdb solid;
+    padding: 10px;
+}
+
+.product-col > .row{
+    padding: 10px;
+}
+
+.payment-col{
+    background-color: #ededed;
+    border: 1px #dbdbdb solid;
+    padding: 10px;
+}
+
+.cart-section{
+    padding-top: 20px;
+}
+

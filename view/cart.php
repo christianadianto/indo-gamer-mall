@@ -1,20 +1,39 @@
 <?php
     include_once 'header.php';
+    session_start();
 ?>
-    <div class="container vouchers-container">
-    <div class="container card-container">
-            <div class="card-deck">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <a href="voucherDetail.php"><img src="../asset/image/googleplay.png" alt="..."></a>
-                    </div>
-                </div>
-                <div class="card text-center">
-                    <div class="card-body">
-                        <img src="../asset/image/steam.png" alt="...">
-                    </div>
-                </div>
-            </div>
+    <div class="cart-section section">
+        <div class="cart-container container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        if(!isset($_SESSION['cart'])){
+                            ?>
+                            <tr>
+                                <td colspan="4" style="text-align:center">You have not put any item into cart</td>
+                            </tr>
+                            <?php
+                        }
+                        else{
+                            for($i=0;$i<count($_SESSION['cart']);$i++){
+                            ?>
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <?php
+                            }
+                        }
+                    ?>
+                </tbody>    
+            </table>
         </div>
     </div>
 
