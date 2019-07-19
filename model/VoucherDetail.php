@@ -5,10 +5,10 @@
     class VoucherDetail
     {
 
-        public static function all(){
+        public static function all($id){
             $connection = Connect::createConnection();
 
-            $query = "SELECT * FROM voucher_details";
+            $query = "SELECT * FROM voucher_details where voucher_id = '".$id."'";
             $result = $connection->query($query);
             
             $data = [];
@@ -24,7 +24,7 @@
         public static function find($id){
             $connection = Connect::createConnection();
 
-            $query = "SELECT * FROM voucher_details where voucher_id = '".$id."'";
+            $query = "SELECT * FROM voucher_details where id = '".$id."'";
             $result = $connection->query($query);
             
             $data = [];
@@ -33,7 +33,10 @@
                     $data[] = $row;
                 }
             }
-          
+
+            if(count($data)>0){
+                return $data[0];
+            }
             return $data;
         }
     }

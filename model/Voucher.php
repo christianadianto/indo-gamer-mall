@@ -33,7 +33,10 @@
                     $data[] = $row;
                 }
             }
-          
+            
+            if(count($data)>0){
+                return $data[0];
+            }
             return $data;
         }
     }

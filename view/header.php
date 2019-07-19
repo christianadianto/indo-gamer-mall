@@ -30,7 +30,7 @@
                     <a class="nav-link" href="../view/index.php">Home</a>
                 </li>
             </ul>
-            <button class="btn btn-outline-dark mr-2"><a href="../view/cart.php"><i class="fas fa-shopping-cart"></i></a></button>
+            <a href="../view/cart.php"><button class="btn btn-outline-dark mr-2"><i class="fas fa-shopping-cart"></i></button></a>
             <button class="btn btn-outline-primary">sign in</button>
         </div>
         </nav>

@@ -25,7 +25,6 @@
             'voucher_id'=>$voucher_id,   
         ];
         $cartController->insert($data);
-        header('Location:cart.php');
     }
     else if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['buynow'])){
         echo ('abc');
@@ -36,7 +35,7 @@
     $voucher_detail_controller = new VoucherDetailController();
 
     $voucher = $voucher_controller->get($voucher_id);
-    $voucher_details = $voucher_detail_controller->get($voucher_id);
+    $voucher_details = $voucher_detail_controller->index($voucher_id);
 // ?>
 
 <div class="voucher-detail-section section">
@@ -46,10 +45,10 @@
                 <div class="product-col col-8">
                     <div class="row">
                         <div class="col-2">
-                            <img src="../asset/image/<?=$voucher[0]['image_detail']?>" alt="<?=$voucher[0]['name']?>">
+                            <img src="../asset/image/<?=$voucher['image_detail']?>" alt="<?=$voucher['name']?>">
                         </div>
                         <div class="col-10 align-self-center">
-                            <span><?=$voucher[0]['name']?></span>
+                            <span><?=$voucher['name']?></span>
                         </div>
                     </div>
                     <hr/>

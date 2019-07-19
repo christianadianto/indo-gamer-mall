@@ -58,3 +58,11 @@ body{
     padding-top: 20px;
 }
 
+.result-container th{
+    text-align: right;
+}
+
+.result-container span{
+    padding-right: 10px;
+    margin-right: 10px;
+}

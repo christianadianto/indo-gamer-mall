@@ -3,8 +3,8 @@
 
     class VoucherDetailController
     {
-        public function index(){
-            return VoucherDetail::all();
+        public function index($id){
+            return VoucherDetail::all($id);
         }
 
         public function get($id){
