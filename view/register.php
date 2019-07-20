@@ -1,3 +1,9 @@
+<?php
+    require_once '../controller/LoginController.php';
+    require '../middleware/guest.php';
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>

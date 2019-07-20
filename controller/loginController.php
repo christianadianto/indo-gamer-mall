@@ -4,7 +4,6 @@
     Class LoginController
     {   
         public function login($data){
-
             if(trim($data['username']) == ""){
                 $_SESSION['err'] = "username must be filled";
                 return;
@@ -24,6 +23,12 @@
                 setcookie('username', $data['username'], time() + (86400 * 30), "/");
                 setcookie('password', $data['password'], time() + (86400 * 30), "/");
             }
+
+            $_SESSION['user']=[
+                'user_id'=>$user['id'],
+                'username'=>$user['username'],
+                'roles'=>$user['roles'],
+            ];
 
             header('Location:index.php');
 

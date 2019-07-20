@@ -1,3 +1,12 @@
+<?php
+    
+    session_start();
+    $username = "";
+    if(isset($_SESSION['user'])){
+        $username = $_SESSION['user']['username'];
+    }
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,6 +40,18 @@
                 </li>
             </ul>
             <a href="cart.php"><button class="btn btn-outline-dark mr-2"><i class="fas fa-shopping-cart"></i></button></a>
+            <?php 
+                if($username==""){
+            ?>
             <a href="login.php"><button class="btn btn-outline-primary">sign in</button></a>
+            <?php
+                }
+                else{
+            ?>
+            <span style="padding-right:10px">Hello, <?=$username?></span>
+            <a href="../controller/SignoutController.php"><button class="btn btn-outline-primary">sign out</button></a>
+            <?php
+                }
+            ?>
         </div>
         </nav>

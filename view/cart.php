@@ -1,8 +1,7 @@
 <?php
     include_once 'header.php';
     require_once '../controller/TransactionController.php';
-    session_start();
-    // session_unset();
+
     $total = 0;
 
     if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['checkout'])){

@@ -1,6 +1,7 @@
 <?php
     require_once '../controller/LoginController.php';
-    session_start();
+    require '../middleware/guest.php';
+    // session_start();
     $err="";
     if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['submit'])){
         $login_controller = new LoginController();
