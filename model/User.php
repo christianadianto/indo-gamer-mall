@@ -2,8 +2,24 @@
 
     require_once '../utility/UuidGenerator.php';
     require_once '../database/Connect.php';
-    Class Transaction
+    Class User
     {
+        public static function find($data){
+            $connection = Connect::createConnection();
+            $password = md5($data['password']);
+            $query = "SELECT id,username,password FROM users WHERE username='".$data['username']."' AND password = '".$password."'";
+            $result = $connection->query($query);
+            
+            $data = [];
+            if($result){
+                while($row = $result->fetch_assoc()){
+                    $data[] = $row;
+                }
+            }
+
+            return $data;
+        }
+
         public static function insert(){
             $connection = Connect::createConnection();
             $id = UuidGenerator::generateUuid();
