@@ -2,8 +2,10 @@
     
     session_start();
     $username = "";
+    $roles = "guest";
     if(isset($_SESSION['user'])){
         $username = $_SESSION['user']['username'];
+        $roles = $_SESSION['user']['roles'];
     }
 ?>
 

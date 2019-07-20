@@ -4,8 +4,6 @@
     {
         public function insert(){
             Transaction::insert();
-
-            session_start();
             unset($_SESSION["cart"]);
         }    
     }

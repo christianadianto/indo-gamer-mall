@@ -10,7 +10,7 @@
 
             date_default_timezone_set('Asia/Jakarta');
             $date = date('Y-m-d H:i:s');
-            $user_id = "32bb92a0-cb73-472e-953f-8eb681a292d5";
+            $user_id = $_SESSION['user']['user_id'];
 
             $query = "INSERT INTO header_transaction(id,transaction_date,user_id,created_at) VALUES('".$id."','".$date."','".$user_id."','".$date."')";
             $result = $connection->query($query);

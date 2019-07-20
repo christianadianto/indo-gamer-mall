@@ -3,6 +3,7 @@
     require_once '../controller/VoucherController.php';
     require_once '../controller/VoucherDetailController.php';
     require_once '../controller/CartController.php';
+    require '../middleware/customer.php';
 
     if(!isset($_GET['id'])){
         header("Location:index.php");

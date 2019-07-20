@@ -1,6 +1,7 @@
 <?php
     include_once 'header.php';
     require_once '../controller/TransactionController.php';
+    require '../middleware/customer.php';
 
     $total = 0;
 
@@ -56,7 +57,7 @@
                         <tr>
                             <th colspan="4">
                                 <span>Total Rp<?=$total?></span>
-                                <input type="submit" class="btn btn-primary" value="checkout">
+                                <input type="submit" class="btn btn-primary" name="checkout" value="checkout">
                             </th>      
                         </tr>
                     </table>

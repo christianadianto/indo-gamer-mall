@@ -1,5 +1,5 @@
 <?php
-    require_once '../controller/LoginController.php';
+    require_once '../controller/RegisterController.php';
     require '../middleware/guest.php';
 
 ?>

@@ -1,10 +1,8 @@
 <?php
 
-session_start();
-
 if(isset($_SESSION['user'])){
     $user = $_SESSION['user'];
-    if($user['roles']!='admin'){
+    if($user['roles']!='customer'){
         return header('Location:../view/index.php');
     }
 }
