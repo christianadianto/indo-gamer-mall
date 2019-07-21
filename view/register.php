@@ -2,6 +2,20 @@
     require_once '../controller/RegisterController.php';
     require '../middleware/guest.php';
 
+    $err="";
+    if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['submit'])){
+        $register_controller = new RegisterController();
+
+        $data = [
+            'username'=>$_POST['username'],
+            'password'=>$_POST['password'],
+        ];
+        $register_controller->register($data);
+        if(isset($_SESSION['err'])){
+            $err = $_SESSION['err'];
+            session_unset();
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -48,23 +62,28 @@
 <body>
     <div class="register-section section">
         <div class="register-container container">
-            <form>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-            </div>
-            <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <a href="login.php" style="float:right"><button type="button" class="btn btn-primary">sign in</button></a>
-            </form>
+            <form action="register.php" method="POST">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                </div>
+                <?php
+                        if($err != ""){
+                            ?>
+                            <div class="form-group">
+                                <small id="emailHelp" style="color:red"><?=$err?></small>
+                            </div>
+                            <?php
+                            $err = "";
+                        }
+                    ?>
+                <input type="submit" class="btn btn-primary" value="Submit" name="submit">
+                <a href="login.php" style="float:right"><button type="button" class="btn btn-primary">sign in</button></a>
+            </form>   
         </div>
     </div>
 </body>

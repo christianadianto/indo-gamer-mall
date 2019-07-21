@@ -13,16 +13,18 @@
                 return;
             }
 
-            $user = User::find($data);
-            if(count($user)==0){
-                $_SESSION['err'] = "wrong username/password";
+            $user = User::checkUsername($data['username']);
+            if($user){
+                $_SESSION['err'] = "username already taken";
                 return;
             }
 
+            $result = User::insert($data);
+
             $_SESSION['user']=[
-                'user_id'=>$user['id'],
-                'username'=>$user['username'],
-                'roles'=>$user['roles'],
+                'user_id'=>$result,
+                'username'=>$data['username'],
+                'roles'=>'customer',
             ];
 
             header('Location:index.php');

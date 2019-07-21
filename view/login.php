@@ -14,11 +14,18 @@
             'password'=>$_POST['password'],
             'remember'=>$remember
         ];
+      
         $login_controller->login($data);
         if(isset($_SESSION['err'])){
             $err = $_SESSION['err'];
             session_unset();
         }
+    }
+    $username="";
+    $password="";
+    if(isset($_COOKIE['username'])){
+        $username = $_COOKIE['username'];
+        $password = $_COOKIE['password'];
     }
 ?>
 <!DOCTYPE html>
@@ -66,11 +73,11 @@
             <form action="login.php" method="POST">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+                <input type="text" class="form-control" id="username" name="username" value="<?=$username?>" placeholder="Enter username">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                <input type="password" class="form-control" id="password" name="password" value="<?=$password?>" placeholder="Password">
             </div>
             <div class="form-group form-check">
                 <input type="checkbox" class="form-check-input" value="true" name="remember" id="remember">
