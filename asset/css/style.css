@@ -66,3 +66,13 @@ body{
     padding-right: 10px;
     margin-right: 10px;
 }
+
+
+.transaction-container .row{
+    margin-top: 20px;
+}
+
+.transaction-container .col{
+    border: 1px black solid;
+    padding: 20px;
+}

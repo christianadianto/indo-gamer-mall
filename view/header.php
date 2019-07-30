@@ -40,10 +40,19 @@
                 <li class="nav-item">
                     <a class="nav-link" href="../view/index.php">Home</a>
                 </li>
+                <?php
+                    if($roles!="guest"){
+                ?>
+                <li>
+                    <a class="nav-link" href="../view/transaction.php">Transaction</a>
+                </li>
+                <?php
+                    }
+                ?>
             </ul>
             <a href="cart.php"><button class="btn btn-outline-dark mr-2"><i class="fas fa-shopping-cart"></i></button></a>
             <?php 
-                if($username==""){
+                if($roles=="guest"){
             ?>
             <a href="login.php"><button class="btn btn-outline-primary">sign in</button></a>
             <?php
