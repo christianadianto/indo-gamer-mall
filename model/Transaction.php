@@ -23,28 +23,19 @@
             
             return $result;
         }
-
-        public static function find($username){
-            $connection = Connect::createConnection();
-
-            $user_id = $_SESSION['user']['user_id'];
-
-            $query = "SELECT ht.id,transaction_date,status,username FROM header_transaction ht JOIN users u ON ht.user_id = u.id WHERE u.id = '".$user_id."'";
-            $header = $connection->query($query);
-
-            $query = "SELECT dt.transaction_id,type,quantity,price FROM detail_transaction dt JOIN voucher_details vd ON vd.id = dt.voucher_detail_id";
-            $detail = $connection->query($query);
-            
-            $result = self::combine($header, $detail);
-            return $result;
-        }
-
+        
         public static function all(){
             $connection = Connect::createConnection();
 
             $user_id = $_SESSION['user']['user_id'];
+            $query = "";
 
-            $query = "SELECT ht.id,transaction_date,status,username FROM header_transaction ht JOIN users u ON ht.user_id = u.id";
+            if($_SESSION['user']['roles']=="customer"){
+                $query = "SELECT ht.id,transaction_date,status,username FROM header_transaction ht JOIN users u ON ht.user_id = u.id WHERE u.id = '".$user_id."' ORDER BY transaction_date DESC";
+            }
+            else{
+                $query = "SELECT ht.id,transaction_date,status,username FROM header_transaction ht JOIN users u ON ht.user_id = u.id ORDER BY transaction_date DESC";
+            }
             $header = $connection->query($query);
 
             $query = "SELECT dt.transaction_id,type,quantity,price FROM detail_transaction dt JOIN voucher_details vd ON vd.id = dt.voucher_detail_id";
@@ -77,6 +68,14 @@
             }
 
             return $result;
+        }
+
+        public static function update($id){
+            $connection = Connect::createConnection();
+
+            $query = "UPDATE header_transaction SET status = 1 WHERE id = '".$id."'";
+            $connection->query($query);
+
         }
 
     }

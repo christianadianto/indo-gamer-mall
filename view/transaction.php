@@ -8,6 +8,11 @@
 
     $transactionController = new TransactionController();
     $transactions = $transactionController->index();
+
+    if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['approve'])){
+       $id=$_POST['id'];
+       $transactionController->update($id);
+    }
 ?>
     <div class="transaction-section section">
         <div class="transaction-container container">
@@ -29,7 +34,10 @@
                     <?php
                         if($role == "admin" && $transaction['status'] == 'not approved'){
                     ?>
-                    <button class="btn btn-primary" style="float:right">approve</button>
+                    <form action="" method="POST">
+                        <input type="hidden" name="id" value="<?=$transaction['id']?>">
+                        <input type="submit" name="approve" value="approve" class="btn btn-primary" style="float:right">
+                    </form>
                     <?php
                         }
                     ?>
@@ -51,6 +59,11 @@
                     }
                 ?>
             </div>
+        <?php
+            }
+            if(count($transactions)==0){
+        ?>
+            <div style="text-align:center;margin-top:20px"><p>No Transaction</p></div>
         <?php
             }
         ?>

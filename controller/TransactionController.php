@@ -8,9 +8,11 @@
         }
         
         public function index(){
-            if($_SESSION['user']['roles']=="admin")
-                return Transaction::all();
-            else
-                return Transaction::find($_SESSION['user']['username']);
+            return Transaction::all();
+        }
+
+        public function update($id){
+            Transaction::update($id);
+            header('Location:../view/transaction.php');
         }
     }

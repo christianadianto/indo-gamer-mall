@@ -3,7 +3,6 @@
     require_once '../controller/VoucherController.php';
     require_once '../controller/VoucherDetailController.php';
     require_once '../controller/CartController.php';
-    require '../middleware/customer.php';
 
     if(!isset($_GET['id'])){
         header("Location:index.php");
@@ -12,6 +11,9 @@
     $voucher_id = $_GET['id'];
 
     if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['addtocart'])){
+        if(!isset($_SESSION['user'])){
+            header("Location:login.php");
+        }
         $cartController = new CartController();
         $quantity = $_POST['quantity'];
         $voucher_type_id = "";
@@ -35,8 +37,17 @@
 
     $voucher = $voucher_controller->get($voucher_id);
     $voucher_details = $voucher_detail_controller->index($voucher_id);
+    $err = "";
+    if(isset($_SESSION['err'])){
+        $err=$_SESSION['err'];
+        unset($_SESSION['err']);
 // ?>
-
+<div class="alert alert-danger" role="alert" style="text-align:center">
+    <?=$err?>
+</div>
+<?php
+    }
+?>
 <div class="voucher-detail-section section">
     <div class="voucher-detail-container container">
         <form action="voucherDetail.php?id=<?=$voucher_id?>" method="POST">
@@ -77,9 +88,9 @@
                         <label for="quantity">Quantity</label>
                         <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Enter qty">
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <input type="submit" class="btn btn-primary" value="Buy Now" name="buynow">
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary" value="Add to cart" name="addtocart">
                     </div>

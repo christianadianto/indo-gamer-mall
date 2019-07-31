@@ -1,6 +1,7 @@
 <?php
     include_once 'header.php';
     require_once '../controller/TransactionController.php';
+    require_once '../controller/CartController.php';
     require '../middleware/customer.php';
 
     $total = 0;
@@ -8,6 +9,14 @@
     if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['checkout'])){
         $transaction_controller = new TransactionController();
         $transaction_controller->insert();
+    }
+    else if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['remove'])){
+        $cart_controller = new CartController();
+        $cart_controller->remove($_POST['voucher_type_id']);
+    }
+    else if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['clear'])){
+        $cart_controller = new CartController();
+        $cart_controller->clear($_POST['voucher_type_id']);
     }
 ?>
     <div class="cart-section section">
@@ -19,6 +28,7 @@
                         <th>Qty</th>
                         <th>Price</th>
                         <th>Subtotal</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,8 +41,7 @@
                             <?php
                         }
                         else{
-                            for($i=0;$i<count($_SESSION['cart']);$i++){
-                                $cart = $_SESSION['cart'][$i];
+                            foreach($_SESSION['cart'] as $cart){
                                 $total += ($cart['price']*$cart['quantity']);
                             ?>
                             <tr>
@@ -40,6 +49,13 @@
                                 <td><?=$cart['quantity']?></td>
                                 <td>Rp<?=$cart['price']?></td>
                                 <td>Rp<?=$cart['price']*$cart['quantity']?></td>
+                                <td>
+                                    <form action="" method="POST">
+                                        <input type="hidden" name="voucher_type_id" value="<?=$cart['voucher_type_id']?>">
+                                        <input class="btn btn-primary" type="submit" value="remove" name="remove">
+                                        <input class="btn btn-primary" type="submit" value="clear" name="clear">
+                                    </form>
+                                </td>
                             </tr>
                             <?php
                             }
