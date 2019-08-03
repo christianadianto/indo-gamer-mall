@@ -49,6 +49,15 @@
                 <?php
                     }
                 ?>
+                <?php
+                    if($roles=="admin"){
+                ?>
+                <li>
+                    <a class="nav-link" href="../view/manageUser.php">Manage User</a>
+                </li>
+                <?php
+                    }
+                ?>
             </ul>
             <a href="cart.php"><button class="btn btn-outline-dark mr-2"><i class="fas fa-shopping-cart"></i></button></a>
             <?php 

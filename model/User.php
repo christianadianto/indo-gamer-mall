@@ -4,6 +4,21 @@
     require_once '../database/Connect.php';
     Class User
     {
+
+        public static function all(){
+            $connection = Connect::createConnection();
+            $query = "SELECT id,username,deleted_at FROM users WHERE roles = 'customer'";
+            $result = $connection->query($query);
+            
+            $data = [];
+            if($result){
+                while($row = $result->fetch_assoc()){
+                    $data[] = $row;
+                }
+            }
+            return $data;
+        }
+
         public static function find($data){
             $connection = Connect::createConnection();
             $password = md5($data['password']);
@@ -55,5 +70,14 @@
             $result = $connection->query($query);
             
            return $id;
+        }
+
+        public static function disable($id){
+            $connection = Connect::createConnection();
+            date_default_timezone_set('Asia/Jakarta');
+            $date = date('Y-m-d H:i:s');
+
+            $query = "UPDATE users SET deleted_at = '".$date."' WHERE id = '".$id."'";
+            $connection->query($query);
         }
     }
