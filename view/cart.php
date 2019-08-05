@@ -36,7 +36,7 @@
                         if(!isset($_SESSION['cart'])){
                             ?>
                             <tr>
-                                <td colspan="4" style="text-align:center">You have not put any item into cart</td>
+                                <td colspan="5" style="text-align:center">You have not put any item into cart</td>
                             </tr>
                             <?php
                         }

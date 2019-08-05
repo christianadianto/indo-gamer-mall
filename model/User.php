@@ -40,7 +40,7 @@
 
         public static function checkUsername($username){
             $connection = Connect::createConnection();
-            $query = "SELECT id,username,password,roles FROM users WHERE username='".$username."' AND deleted_at IS NULL";
+            $query = "SELECT id,username,password,roles FROM users WHERE username='".$username."'";
             $result = $connection->query($query);
             
             $data = [];

@@ -59,7 +59,6 @@
                     }
                 ?>
             </ul>
-            <a href="cart.php"><button class="btn btn-outline-dark mr-2"><i class="fas fa-shopping-cart"></i></button></a>
             <?php 
                 if($roles=="guest"){
             ?>
@@ -68,6 +67,7 @@
                 }
                 else{
             ?>
+            <a href="cart.php"><button class="btn btn-outline-dark mr-2"><i class="fas fa-shopping-cart"></i></button></a>
             <span style="padding-right:10px">Hello, <?=$username?></span>
             <a href="../controller/SignoutController.php"><button class="btn btn-outline-primary">sign out</button></a>
             <?php
